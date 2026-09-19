@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bestelling bevestigd — Dr. Gift Shop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo"><span class="icon">🩺</span> Dr. Gift Shop</a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="winkel.html?cat=Keuken">Keuken</a>
+      <a href="winkel.html?cat=Sieraden en accessoires">Sieraden en accessoires</a>
+      <a href="winkel.html?cat=Kind">Kind</a>
+      <a href="winkel.html?cat=Office">Office</a>
+      <a href="winkel.html?cat=Sport">Sport</a>
+      <a href="winkel.html?cat=Exclusief">Exclusief</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a href="cart.html" class="cart-link">🛒 <span data-cart-count>0</span> · <span data-cart-total>€ 0,00</span></a>
+  </div>
+</header>
+
+<section class="confirmation">
+  <div class="icon">✓</div>
+  <h1>Bedankt voor je bestelling!</h1>
+  <p>We hebben je bestelling ontvangen en gaan er meteen mee aan de slag. Je ontvangt een bevestiging per e-mail zodra je pakket onderweg is.</p>
+  <div class="order-number" id="order-number"></div>
+  <div>
+    <a class="btn" href="winkel.html">Verder winkelen</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  © Dr. Gift Shop 2024
+</footer>
+
+<script src="products.js"></script>
+<script src="script.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get("session_id");
+  const localOrder = sessionStorage.getItem("laatste_order");
+  const orderEl = document.getElementById("order-number");
+  orderEl.textContent = "Bestelnummer: " + (sessionId || localOrder || generateOrderNumber());
+</script>
+</body>
+</html>

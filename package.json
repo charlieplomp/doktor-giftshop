@@ -1,0 +1,9 @@
+{
+  "name": "dr-gift-shop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dr. Gift Shop — webshop met Mollie-betalingen via Vercel Serverless Functions",
+  "dependencies": {
+    "@mollie/api-client": "^4.6.0"
+  }
+}
