@@ -37,39 +37,30 @@ const PRODUCTS = [
     description: "Praktisch en grappig slabbetje met medisch thema, ideaal voor bij de eerste hapjes."
   },
   {
-    id: "mok",
-    name: "Mok",
+    id: "cappuccino-kopje",
+    name: "Cappuccino kopje & schotel",
     price: 18.50,
     categories: ["Keuken", "Office"],
     bestseller: true,
     image: "images/mok.jpg",
-    description: "Start elke dienst goed met deze stevige mok. Geschikt voor de vroege ochtendkoffie voor of na een nachtdienst."
+    description: "Stevig cappuccino kopje met schotel, geschikt voor de vroege ochtendkoffie voor of na een nachtdienst."
   },
   {
-    id: "sleutelhanger",
-    name: "Sleutelhanger",
-    price: 17.50,
-    categories: ["Sieraden en accessoires", "Office"],
-    bestseller: false,
-    image: "https://placehold.co/600x600/f5f5f0/1a1a1a?text=Sleutelhanger",
-    description: "Compacte sleutelhanger met medisch detail. Een klein, doordacht cadeautje."
-  },
-  {
-    id: "manchetknopen",
-    name: "Manchetknopen",
-    price: 47.50,
-    categories: ["Sieraden en accessoires", "Office", "Exclusief"],
-    bestseller: false,
-    image: "https://placehold.co/600x600/f5f5f0/1a1a1a?text=Manchetknopen",
-    description: "Verfijnde manchetknopen voor de dokter die stijl waardeert, ook buiten het ziekenhuis."
-  },
-  {
-    id: "oorbellen",
-    name: "Oorbellen",
-    price: 19.95,
-    categories: ["Sieraden en accessoires"],
+    id: "espresso-kopje",
+    name: "Espresso kopje & schotel",
+    price: 15.95,
+    categories: ["Keuken", "Office"],
     bestseller: true,
-    image: "https://placehold.co/600x600/f5f5f0/1a1a1a?text=Oorbellen",
-    description: "Subtiele oorbellen met een medisch detail. Draagbaar op de afdeling en daarbuiten."
+    image: "images/espressokopje.jpg",
+    description: "Klein espresso kopje met schotel voor de korte, krachtige koffiepauze tussen twee patiënten door."
+  },
+  {
+    id: "ansichtkaarten",
+    name: "Ansichtkaarten",
+    price: 8.50,
+    categories: ["Office"],
+    bestseller: false,
+    image: "images/ansichtkaarten.jpg",
+    description: "Set ansichtkaarten met het Dr. Gift Shop-logo, in het donkerblauw en rood. Leuk om te versturen of op te hangen op de afdeling."
   }
 ];
