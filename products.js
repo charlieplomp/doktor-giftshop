@@ -62,5 +62,23 @@ const PRODUCTS = [
     bestseller: false,
     image: "images/ansichtkaarten.jpg",
     description: "Set ansichtkaarten met het Dr. Gift Shop-logo, in het donkerblauw en rood. Leuk om te versturen of op te hangen op de afdeling."
+  },
+  {
+    id: "bordje",
+    name: "Ontbijt-/lunchbordje",
+    price: 17.50,
+    categories: ["Keuken"],
+    bestseller: false,
+    image: "images/bordje.jpg",
+    description: "Stevig ontbijt- of lunchbordje met een subtiel dokters-detail aan de rand. Perfect voor de vroege dienst of de lunch op de afdeling."
+  },
+  {
+    id: "bierviltjes",
+    name: "Bierviltjes",
+    price: 12.50,
+    categories: ["Keuken"],
+    bestseller: false,
+    image: "images/coasters.jpg",
+    description: "Set stijlvolle bierviltjes met stethoscoop-icoon. Onmisbaar onder het biertje na een lange dienst."
   }
 ];
