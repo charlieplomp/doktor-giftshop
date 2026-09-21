@@ -6,7 +6,7 @@ const PRODUCTS = [
     price: 21.50,
     categories: ["Sport"],
     bestseller: true,
-    image: "https://placehold.co/600x600/f5f5f0/1a1a1a?text=T-shirt",
+    image: "images/tshirt.jpg",
     description: "Zacht katoenen T-shirt met een knipoog naar het doktersleven. Comfortabel voor onder de witte jas of gewoon in het weekend."
   },
   {
@@ -15,7 +15,7 @@ const PRODUCTS = [
     price: 19.95,
     categories: ["Kind"],
     bestseller: false,
-    image: "https://placehold.co/600x600/f5f5f0/1a1a1a?text=Romper",
+    image: "images/romper.jpg",
     description: "Voor de kleinste aanstormende dokter. Zachte biologisch katoenen romper, ideaal als kraamcadeau voor medische ouders."
   },
   {
@@ -24,7 +24,7 @@ const PRODUCTS = [
     price: 45.00,
     categories: ["Kind"],
     bestseller: true,
-    image: "https://placehold.co/600x600/f5f5f0/1a1a1a?text=Beer",
+    image: "images/beer-stethoscoop.jpg",
     description: "Een knuffelbeer compleet met eigen stethoscoopje. Perfect cadeau voor een pasgeboren baby van een dokter, of gewoon omdat het kan."
   },
   {
@@ -33,7 +33,7 @@ const PRODUCTS = [
     price: 37.50,
     categories: ["Kind"],
     bestseller: false,
-    image: "https://placehold.co/600x600/f5f5f0/1a1a1a?text=Slabbetje",
+    image: "images/slabbetje.jpg",
     description: "Praktisch en grappig slabbetje met medisch thema, ideaal voor bij de eerste hapjes."
   },
   {
@@ -42,7 +42,7 @@ const PRODUCTS = [
     price: 18.50,
     categories: ["Keuken", "Office"],
     bestseller: true,
-    image: "https://placehold.co/600x600/f5f5f0/1a1a1a?text=Mok",
+    image: "images/mok.jpg",
     description: "Start elke dienst goed met deze stevige mok. Geschikt voor de vroege ochtendkoffie voor of na een nachtdienst."
   },
   {

@@ -145,13 +145,22 @@ function initNav() {
     });
   }
 
-  const path = window.location.pathname.split("/").pop() || "index.html";
+  const currentPath = window.location.pathname.split("/").pop() || "index.html";
+  const currentCat = new URLSearchParams(window.location.search).get("cat");
   document.querySelectorAll(".main-nav a").forEach(link => {
-    const href = (link.getAttribute("href") || "").split("?")[0];
-    if (href === path) {
+    const hrefRaw = link.getAttribute("href") || "";
+    const [hrefPath, hrefQuery] = hrefRaw.split("?");
+    const hrefCat = hrefQuery ? new URLSearchParams(hrefQuery).get("cat") : null;
+    if (hrefPath === currentPath && hrefCat === currentCat) {
       link.classList.add("active");
     }
   });
+
+  const searchInput = document.querySelector(".search-bar input[name='search']");
+  if (searchInput) {
+    const currentSearch = new URLSearchParams(window.location.search).get("search");
+    if (currentSearch) searchInput.value = currentSearch;
+  }
 
   updateCartBadge();
 }

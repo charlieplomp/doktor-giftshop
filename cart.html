@@ -9,8 +9,20 @@
 <body>
 
 <header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="logo"><span class="icon">🩺</span> Dr. Gift Shop</a>
+  <div class="header-top">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">🩺</span>
+      <span class="logo-text">
+        <span class="logo-name">Dr. Gift Shop</span>
+        <span class="logo-tagline">cadeaus voor dokters &amp; medici</span>
+      </span>
+    </a>
+    <form class="search-bar" action="winkel.html" method="get">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="search" name="search" placeholder="Zoek producten…" aria-label="Zoek producten">
+    </form>
+  </div>
+  <div class="nav-row">
     <button class="nav-toggle" aria-label="Menu">☰</button>
     <nav class="main-nav">
       <a href="index.html">Home</a>
@@ -22,7 +34,11 @@
       <a href="winkel.html?cat=Exclusief">Exclusief</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <a href="cart.html" class="cart-link">🛒 <span data-cart-count>0</span> · <span data-cart-total>€ 0,00</span></a>
+    <a href="cart.html" class="cart-link">
+      <span class="cart-total" data-cart-total>€ 0,00</span>
+      <span class="cart-count"><span data-cart-count>0</span> items</span>
+      <svg class="basket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+    </a>
   </div>
 </header>
 
