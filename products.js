@@ -66,7 +66,7 @@ const PRODUCTS = [
   {
     id: "bordje",
     name: "Ontbijt-/lunchbordje",
-    price: 17.50,
+    price: 14.00,
     categories: ["Keuken"],
     bestseller: false,
     image: "images/bordje.jpg",
@@ -75,7 +75,7 @@ const PRODUCTS = [
   {
     id: "bierviltjes",
     name: "Bierviltjes",
-    price: 12.50,
+    price: 20.00,
     categories: ["Keuken"],
     bestseller: false,
     image: "images/coasters.jpg",
