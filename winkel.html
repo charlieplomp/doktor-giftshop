@@ -30,7 +30,6 @@
       <a href="winkel.html?cat=Kind">Kind</a>
       <a href="winkel.html?cat=Office">Office</a>
       <a href="winkel.html?cat=Sport">Sport</a>
-      <a href="winkel.html?cat=Exclusief">Exclusief</a>
       <a href="contact.html">Contact</a>
     </nav>
     <a href="cart.html" class="cart-link">
@@ -54,7 +53,7 @@
 <script src="products.js"></script>
 <script src="script.js"></script>
 <script>
-  const CATEGORIES = ["Keuken", "Kind", "Office", "Sport", "Exclusief"];
+  const CATEGORIES = ["Keuken", "Kind", "Office", "Sport"];
   const params = new URLSearchParams(window.location.search);
   let activeCat = params.get("cat") || "Alles";
   let searchQuery = (params.get("search") || "").trim();
