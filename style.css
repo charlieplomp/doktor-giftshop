@@ -354,12 +354,6 @@ button {
   margin: 0 0 24px;
 }
 
-.price-btw-note {
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--grey);
-}
-
 .product-info .description {
   color: #333;
   margin: 0 0 32px;
