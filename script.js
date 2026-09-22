@@ -1,5 +1,6 @@
 // Dr. Gift Shop — winkelwagen, navigatie en checkout
 const CART_KEY = "drgiftshop_cart";
+const BTW_RATE = 0.21;
 
 function formatPrice(amount) {
   return "€ " + amount.toFixed(2).replace(".", ",");
@@ -23,48 +24,52 @@ function clearCart() {
   updateCartBadge();
 }
 
-function getMinQty(productId) {
-  const product = PRODUCTS.find(p => p.id === productId);
+function getMinQty(cartItemId) {
+  const baseId = cartItemId.split("::")[0];
+  const product = PRODUCTS.find(p => p.id === baseId);
   return (product && product.minQty) || 1;
 }
 
-function addToCart(productId, qty) {
-  const minQty = getMinQty(productId);
+function addToCart(cartItemId, qty) {
+  const minQty = getMinQty(cartItemId);
   qty = qty || minQty;
   const cart = getCart();
-  const existing = cart.find(item => item.id === productId);
+  const existing = cart.find(item => item.id === cartItemId);
   if (existing) {
     existing.qty += qty;
   } else {
-    cart.push({ id: productId, qty: Math.max(minQty, qty) });
+    cart.push({ id: cartItemId, qty: Math.max(minQty, qty) });
   }
   saveCart(cart);
 }
 
-function removeFromCart(productId) {
-  const cart = getCart().filter(item => item.id !== productId);
+function removeFromCart(cartItemId) {
+  const cart = getCart().filter(item => item.id !== cartItemId);
   saveCart(cart);
 }
 
-function setQty(productId, qty) {
+function setQty(cartItemId, qty) {
   const cart = getCart();
-  const item = cart.find(item => item.id === productId);
+  const item = cart.find(item => item.id === cartItemId);
   if (!item) return;
   if (qty <= 0) {
-    removeFromCart(productId);
+    removeFromCart(cartItemId);
     return;
   }
-  item.qty = Math.max(getMinQty(productId), qty);
+  item.qty = Math.max(getMinQty(cartItemId), qty);
   saveCart(cart);
 }
 
 function getCartItems() {
   return getCart()
     .map(item => {
-      const product = PRODUCTS.find(p => p.id === item.id);
+      const [baseId, size] = item.id.split("::");
+      const product = PRODUCTS.find(p => p.id === baseId);
       if (!product) return null;
       return {
         ...product,
+        cartId: item.id,
+        size: size || null,
         qty: item.qty,
         lineTotal: product.price * item.qty
       };
@@ -76,8 +81,17 @@ function getCartCount() {
   return getCart().reduce((sum, item) => sum + item.qty, 0);
 }
 
-function getCartTotal() {
+// Prijzen in products.js zijn exclusief btw.
+function getCartSubtotal() {
   return getCartItems().reduce((sum, item) => sum + item.lineTotal, 0);
+}
+
+function getCartBtw() {
+  return getCartSubtotal() * BTW_RATE;
+}
+
+function getCartTotal() {
+  return getCartSubtotal() + getCartBtw();
 }
 
 function updateCartBadge() {
@@ -95,15 +109,14 @@ function generateOrderNumber() {
   return "DGS-" + Date.now().toString(36).toUpperCase();
 }
 
-async function startCheckout() {
+async function submitOrderForPayment(customer, button) {
   const items = getCartItems();
   if (items.length === 0) return;
 
-  const checkoutBtn = document.getElementById("checkout-btn");
-  const originalLabel = checkoutBtn ? checkoutBtn.textContent : null;
-  if (checkoutBtn) {
-    checkoutBtn.disabled = true;
-    checkoutBtn.textContent = "Bezig met afrekenen…";
+  const originalLabel = button ? button.textContent : null;
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Bezig met afrekenen…";
   }
 
   try {
@@ -113,11 +126,14 @@ async function startCheckout() {
       body: JSON.stringify({
         items: items.map(item => ({
           id: item.id,
-          name: item.name,
+          name: item.size ? `${item.name} (maat ${item.size})` : item.name,
           qty: item.qty,
           price: item.price
         })),
-        total: getCartTotal()
+        subtotal: getCartSubtotal(),
+        btw: getCartBtw(),
+        total: getCartTotal(),
+        customer
       })
     });
 
@@ -135,9 +151,9 @@ async function startCheckout() {
     window.location.href = data.checkoutUrl;
   } catch (error) {
     alert(error.message || "Er is iets misgegaan bij het starten van de betaling. Probeer het opnieuw.");
-    if (checkoutBtn) {
-      checkoutBtn.disabled = false;
-      checkoutBtn.textContent = originalLabel;
+    if (button) {
+      button.disabled = false;
+      button.textContent = originalLabel;
     }
   }
 }

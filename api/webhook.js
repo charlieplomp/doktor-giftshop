@@ -25,11 +25,12 @@ module.exports = async (req, res) => {
     const payment = await mollieClient.payments.get(paymentId);
 
     if (payment.status === "paid") {
-      console.log("Betaling ontvangen:", {
+      console.log("Betaling ontvangen — verstuur naar:", {
         betalingId: payment.id,
         bedrag: payment.amount,
         omschrijving: payment.description,
-        artikelen: payment.metadata && payment.metadata.items
+        artikelen: payment.metadata && payment.metadata.items,
+        klant: payment.metadata && payment.metadata.klant
       });
     } else {
       console.log(`Betaling ${payment.id} heeft status "${payment.status}", nog geen actie ondernomen.`);

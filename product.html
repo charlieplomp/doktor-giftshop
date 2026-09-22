@@ -64,13 +64,23 @@
   } else {
     document.title = product.name + " — Dr. Gift Shop";
     const minQty = product.minQty || 1;
+    const hasSizes = Array.isArray(product.sizes) && product.sizes.length > 0;
     root.innerHTML = `
       <div class="product-detail">
         <div class="thumb"><img src="${product.image}" alt="${product.name}"></div>
         <div class="product-info">
           <h1>${product.name}</h1>
-          <p class="price">${formatPrice(product.price)}</p>
+          <p class="price">${formatPrice(product.price)} <span class="price-btw-note">excl. btw</span></p>
           <p class="description">${product.description}</p>
+          ${hasSizes ? `
+          <div class="size-row">
+            <label for="size-select">Maat</label>
+            <select id="size-select">
+              <option value="">Kies een optie</option>
+              ${product.sizes.map(s => `<option value="${s}">${s}</option>`).join("")}
+            </select>
+          </div>
+          ` : ""}
           <div class="qty-row">
             <div class="qty-control">
               <button type="button" id="qty-minus">−</button>
@@ -79,6 +89,7 @@
             </div>
             <button class="btn" id="add-btn">In winkelwagen</button>
           </div>
+          <p class="size-error" id="size-error">Kies eerst een maat.</p>
           <p class="add-confirm" id="add-confirm">Toegevoegd aan je winkelwagen.</p>
         </div>
       </div>
@@ -94,9 +105,18 @@
     qtyInput.addEventListener("change", () => {
       qtyInput.value = Math.max(minQty, parseInt(qtyInput.value || String(minQty), 10) || minQty);
     });
+
+    const sizeSelect = document.getElementById("size-select");
+    const sizeError = document.getElementById("size-error");
     document.getElementById("add-btn").addEventListener("click", () => {
+      if (hasSizes && !sizeSelect.value) {
+        sizeError.classList.add("show");
+        return;
+      }
+      sizeError.classList.remove("show");
       const qty = Math.max(minQty, parseInt(qtyInput.value || String(minQty), 10) || minQty);
-      addToCart(product.id, qty);
+      const cartId = hasSizes ? `${product.id}::${sizeSelect.value}` : product.id;
+      addToCart(cartId, qty);
       const confirm = document.getElementById("add-confirm");
       confirm.classList.add("show");
       setTimeout(() => confirm.classList.remove("show"), 2000);

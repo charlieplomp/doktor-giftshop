@@ -350,9 +350,48 @@ button {
   margin: 0 0 24px;
 }
 
+.price-btw-note {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--grey);
+}
+
 .product-info .description {
   color: #333;
   margin: 0 0 32px;
+}
+
+.size-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.size-row label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.size-row select {
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: var(--white);
+  color: var(--black);
+}
+
+.size-error {
+  font-size: 0.85rem;
+  color: #b3261e;
+  margin: -16px 0 16px;
+  display: none;
+}
+
+.size-error.show {
+  display: block;
 }
 
 .qty-row {
@@ -501,6 +540,13 @@ button {
   margin-bottom: 20px;
 }
 
+.cart-summary .subtotal-row {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--grey);
+  margin-bottom: 10px;
+}
+
 .empty-cart {
   text-align: center;
   padding: 80px 24px;
@@ -616,5 +662,91 @@ button {
   .cart-table th:nth-child(2),
   .cart-table td:nth-child(2) {
     display: none;
+  }
+}
+
+/* Checkout page */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.checkout-form h3,
+.checkout-summary h3 {
+  font-size: 1.1rem;
+  margin: 0 0 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-field {
+  margin-bottom: 16px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-field input {
+  width: 100%;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: var(--white);
+  color: var(--black);
+}
+
+.form-field input:focus {
+  outline: 2px solid var(--black);
+  outline-offset: 1px;
+}
+
+.form-note {
+  font-size: 0.8rem;
+  color: var(--grey);
+}
+
+.checkout-summary {
+  background: var(--off-white);
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.checkout-items {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.checkout-items td {
+  padding: 6px 0;
+  font-size: 0.9rem;
+}
+
+.checkout-items td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 520px) {
+  .form-row {
+    grid-template-columns: 1fr;
   }
 }

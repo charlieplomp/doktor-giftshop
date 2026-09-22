@@ -83,16 +83,16 @@
                 <div class="cart-item-info">
                   <img src="${item.image}" alt="${item.name}">
                   <div>
-                    <p class="name">${item.name}</p>
-                    <button class="remove-btn" data-remove="${item.id}">Verwijderen</button>
+                    <p class="name">${item.name}${item.size ? ` · Maat ${item.size}` : ""}</p>
+                    <button class="remove-btn" data-remove="${item.cartId}">Verwijderen</button>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="qty-control">
-                  <button type="button" data-decrease="${item.id}">−</button>
-                  <input type="text" value="${item.qty}" data-qty="${item.id}" inputmode="numeric">
-                  <button type="button" data-increase="${item.id}">+</button>
+                  <button type="button" data-decrease="${item.cartId}">−</button>
+                  <input type="text" value="${item.qty}" data-qty="${item.cartId}" inputmode="numeric">
+                  <button type="button" data-increase="${item.cartId}">+</button>
                 </div>
               </td>
               <td>${formatPrice(item.lineTotal)}</td>
@@ -101,11 +101,23 @@
         </tbody>
       </table>
       <div class="cart-summary">
+        <div class="total-row subtotal-row">
+          <span>Subtotaal (excl. btw)</span>
+          <span>${formatPrice(getCartSubtotal())}</span>
+        </div>
+        <div class="total-row subtotal-row">
+          <span>Verzending</span>
+          <span>Gratis verzending</span>
+        </div>
+        <div class="total-row subtotal-row">
+          <span>Btw (21%)</span>
+          <span>${formatPrice(getCartBtw())}</span>
+        </div>
         <div class="total-row">
           <span>Totaal</span>
           <span>${formatPrice(getCartTotal())}</span>
         </div>
-        <button class="btn" id="checkout-btn" style="width:100%;">Afrekenen</button>
+        <a class="btn" href="checkout.html" style="width:100%; display:block; text-align:center; box-sizing:border-box;">Afrekenen</a>
       </div>
     `;
 
@@ -131,11 +143,10 @@
     });
     root.querySelectorAll("[data-qty]").forEach(input => {
       input.addEventListener("change", () => {
-        setQty(input.dataset.qty, Math.max(1, parseInt(input.value, 10) || 1));
+        setQty(input.dataset.qty, parseInt(input.value, 10) || 1);
         renderCart();
       });
     });
-    document.getElementById("checkout-btn").addEventListener("click", startCheckout);
   }
 
   renderCart();

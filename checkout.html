@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afrekenen — Dr. Gift Shop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">🩺</span>
+      <span class="logo-text">
+        <span class="logo-name">Dr. Gift Shop</span>
+        <span class="logo-tagline">cadeaus voor dokters &amp; medici</span>
+      </span>
+    </a>
+    <form class="search-bar" action="winkel.html" method="get">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="search" name="search" placeholder="Zoek producten…" aria-label="Zoek producten">
+    </form>
+  </div>
+  <div class="nav-row">
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="winkel.html">Winkel</a>
+      <a href="winkel.html?cat=Keuken">Keuken</a>
+      <a href="winkel.html?cat=Kind">Kind</a>
+      <a href="winkel.html?cat=Office">Office</a>
+      <a href="winkel.html?cat=Sport">Sport</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a href="cart.html" class="cart-link">
+      <span class="cart-total" data-cart-total>€ 0,00</span>
+      <span class="cart-count"><span data-cart-count>0</span> items</span>
+      <svg class="basket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+    </a>
+  </div>
+</header>
+
+<section class="section">
+  <h2 class="section-title">Afrekenen</h2>
+  <div id="checkout-root"></div>
+</section>
+
+<footer class="site-footer">
+  © Dr. Gift Shop 2024
+</footer>
+
+<script src="products.js"></script>
+<script src="script.js"></script>
+<script>
+  function renderCheckout() {
+  const root = document.getElementById("checkout-root");
+  const items = getCartItems();
+
+  if (items.length === 0) {
+    root.innerHTML = `
+      <div class="empty-cart">
+        <p>Je winkelwagen is leeg.</p>
+        <a class="btn" href="winkel.html">Bekijk de winkel</a>
+      </div>
+    `;
+  } else {
+    root.innerHTML = `
+      <div class="checkout-layout">
+        <form id="checkout-form" class="checkout-form" novalidate>
+          <h3>Factuur- en verzendgegevens</h3>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="voornaam">Voornaam *</label>
+              <input type="text" id="voornaam" name="voornaam" required>
+            </div>
+            <div class="form-field">
+              <label for="achternaam">Achternaam *</label>
+              <input type="text" id="achternaam" name="achternaam" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="bedrijfsnaam">Bedrijfsnaam (optioneel)</label>
+            <input type="text" id="bedrijfsnaam" name="bedrijfsnaam">
+          </div>
+          <div class="form-field">
+            <label for="straat">Straat en huisnummer *</label>
+            <input type="text" id="straat" name="straat" required>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="postcode">Postcode *</label>
+              <input type="text" id="postcode" name="postcode" required>
+            </div>
+            <div class="form-field">
+              <label for="plaats">Plaats *</label>
+              <input type="text" id="plaats" name="plaats" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="telefoon">Telefoon *</label>
+              <input type="tel" id="telefoon" name="telefoon" required>
+            </div>
+            <div class="form-field">
+              <label for="email">E-mailadres *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+          </div>
+          <p class="form-note">Land van levering: Nederland</p>
+        </form>
+
+        <div class="checkout-summary">
+          <h3>Je bestelling</h3>
+          <table class="checkout-items">
+            ${items.map(item => `
+              <tr>
+                <td>${item.name}${item.size ? ` · Maat ${item.size}` : ""} × ${item.qty}</td>
+                <td>${formatPrice(item.lineTotal)}</td>
+              </tr>
+            `).join("")}
+          </table>
+          <div class="cart-summary" style="margin-top:16px;">
+            <div class="total-row subtotal-row">
+              <span>Subtotaal (excl. btw)</span>
+              <span>${formatPrice(getCartSubtotal())}</span>
+            </div>
+            <div class="total-row subtotal-row">
+              <span>Verzending</span>
+              <span>Gratis verzending</span>
+            </div>
+            <div class="total-row subtotal-row">
+              <span>Btw (21%)</span>
+              <span>${formatPrice(getCartBtw())}</span>
+            </div>
+            <div class="total-row">
+              <span>Totaal</span>
+              <span>${formatPrice(getCartTotal())}</span>
+            </div>
+            <button class="btn" id="pay-btn" style="width:100%;">Plaats bestelling</button>
+            <p class="form-note" style="margin-top:12px;">Je wordt na het plaatsen van je bestelling doorgestuurd naar Mollie om veilig te betalen.</p>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById("pay-btn").addEventListener("click", () => {
+      const form = document.getElementById("checkout-form");
+      if (!form.reportValidity()) return;
+
+      const customer = {
+        voornaam: document.getElementById("voornaam").value.trim(),
+        achternaam: document.getElementById("achternaam").value.trim(),
+        bedrijfsnaam: document.getElementById("bedrijfsnaam").value.trim(),
+        straat: document.getElementById("straat").value.trim(),
+        postcode: document.getElementById("postcode").value.trim(),
+        plaats: document.getElementById("plaats").value.trim(),
+        land: "Nederland",
+        telefoon: document.getElementById("telefoon").value.trim(),
+        email: document.getElementById("email").value.trim()
+      };
+
+      submitOrderForPayment(customer, document.getElementById("pay-btn"));
+    });
+  }
+  }
+
+  renderCheckout();
+</script>
+</body>
+</html>

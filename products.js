@@ -7,7 +7,8 @@ const PRODUCTS = [
     categories: ["Sport"],
     bestseller: true,
     image: "images/tshirt.jpg",
-    description: "Zacht katoenen T-shirt met een knipoog naar het doktersleven. Comfortabel voor onder de witte jas of gewoon in het weekend."
+    sizes: ["M", "L", "XL"],
+    description: "Unisex t-shirt, zwart, 100% katoen, met print. Maat M, L en XL."
   },
   {
     id: "romper",
@@ -63,7 +64,7 @@ const PRODUCTS = [
     categories: ["Office"],
     bestseller: false,
     image: "images/ansichtkaarten.jpg",
-    description: "Set ansichtkaarten met het Dr. Gift Shop-logo, in het donkerblauw en rood. Leuk om te versturen of op te hangen op de afdeling."
+    description: "Rode en zwarte ansichtkaarten (10 x 15 cm), 20 stuks."
   },
   {
     id: "bordje",
