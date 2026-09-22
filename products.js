@@ -119,7 +119,7 @@ const PRODUCTS = [
     categories: ["Sport"],
     bestseller: false,
     image: "images/sportkousen.jpg",
-    sizes: ["36-40", "41-46"],
+    sizes: ["36-40", "41-45"],
     description: "Witte sportkousen met stethoscoop-opdruk. Comfortabel voor onderweg of tijdens het sporten."
   }
 ];
