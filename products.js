@@ -84,5 +84,42 @@ const PRODUCTS = [
     bestseller: false,
     image: "images/coasters.jpg",
     description: "Leuke kartonnen bierviltjes (dia 10 cm), 50 stuks."
+  },
+  {
+    id: "placemat-groot",
+    name: "Placemats logo groot",
+    price: 16.50,
+    categories: ["Keuken"],
+    bestseller: false,
+    image: "images/placemat-groot.jpg",
+    description: "Blok met papieren placemats, 50 vel, 42 x 30 cm."
+  },
+  {
+    id: "placemat-klein",
+    name: "Placemats logo klein",
+    price: 16.50,
+    categories: ["Keuken"],
+    bestseller: false,
+    image: "images/placemat-klein.jpg",
+    description: "Blok met papieren placemats, 50 vel, 42 x 30 cm."
+  },
+  {
+    id: "ijskastmagneet",
+    name: "IJskastmagneet",
+    price: 12.50,
+    categories: ["Keuken"],
+    bestseller: false,
+    image: "images/ijskastmagneet.jpg",
+    description: "IJskastmagneet (handbeschilderd hars), 6 x 6 x 2 cm."
+  },
+  {
+    id: "sportkousen",
+    name: "Sportkousen",
+    price: 19.95,
+    categories: ["Sport"],
+    bestseller: false,
+    image: "images/sportkousen.jpg",
+    sizes: ["36-40", "41-46"],
+    description: "Witte sportkousen met stethoscoop-opdruk. Comfortabel voor onderweg of tijdens het sporten."
   }
 ];
