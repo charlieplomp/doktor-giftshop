@@ -3,6 +3,15 @@ const { createMollieClient } = require("@mollie/api-client");
 
 const VERPLICHTE_KLANTVELDEN = ["voornaam", "achternaam", "straat", "postcode", "plaats", "telefoon", "email"];
 
+// Mollie verwacht een internationaal telefoonnummer (E.164); klanten typen meestal het lokale 06-formaat.
+function normaliseerTelefoon(nummer) {
+  const cijfers = nummer.replace(/[\s()-]/g, "");
+  if (cijfers.startsWith("+")) return cijfers;
+  if (cijfers.startsWith("00")) return "+" + cijfers.slice(2);
+  if (cijfers.startsWith("0")) return "+31" + cijfers.slice(1);
+  return "+31" + cijfers;
+}
+
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -60,7 +69,7 @@ module.exports = async (req, res) => {
         givenName: voornaam,
         familyName: achternaam,
         email: customer.email.trim(),
-        phone: customer.telefoon.trim(),
+        phone: normaliseerTelefoon(customer.telefoon.trim()),
         streetAndNumber: customer.straat.trim(),
         postalCode: customer.postcode.trim(),
         city: customer.plaats.trim(),
@@ -89,9 +98,6 @@ module.exports = async (req, res) => {
     return res.status(200).json({ checkoutUrl: payment.getCheckoutUrl() });
   } catch (error) {
     console.error("Fout bij het aanmaken van de Mollie-betaling:", error);
-    return res.status(500).json({
-      error: "Er is iets misgegaan bij het starten van de betaling. Probeer het opnieuw.",
-      debug: { message: error.message, title: error.title, field: error.field, statusCode: error.statusCode }
-    });
+    return res.status(500).json({ error: "Er is iets misgegaan bij het starten van de betaling. Probeer het opnieuw." });
   }
 };
