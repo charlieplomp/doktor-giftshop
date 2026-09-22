@@ -8,7 +8,7 @@ const PRODUCTS = [
     bestseller: true,
     image: "images/tshirt.jpg",
     sizes: ["M", "L", "XL"],
-    description: "Unisex t-shirt, zwart, 100% katoen, met print. Maat M, L en XL."
+    description: "Unisex t-shirt, wit, 100% katoen, met print. Maat M, L en XL."
   },
   {
     id: "romper",
