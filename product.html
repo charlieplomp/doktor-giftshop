@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Product — Dr. Gift Shop</title>
+<meta name="description" id="meta-description" content="Unieke cadeaus voor dokters, artsen en medisch personeel bij Dr. Gift Shop.">
+<link rel="canonical" id="meta-canonical" href="https://www.dokter-giftshop.nl/product.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="Dr. Gift Shop">
+<meta property="og:title" id="meta-og-title" content="Dr. Gift Shop">
+<meta property="og:description" id="meta-og-description" content="Unieke cadeaus voor dokters, artsen en medisch personeel.">
+<meta property="og:image" id="meta-og-image" content="https://www.dokter-giftshop.nl/images/hero-navy.png">
+<meta property="og:url" id="meta-og-url" content="https://www.dokter-giftshop.nl/product.html">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -63,6 +73,33 @@
     `;
   } else {
     document.title = product.name + " — Dr. Gift Shop";
+    const productUrl = `https://www.dokter-giftshop.nl/product.html?id=${product.id}`;
+    document.getElementById("meta-description").setAttribute("content", product.description);
+    document.getElementById("meta-canonical").setAttribute("href", productUrl);
+    document.getElementById("meta-og-title").setAttribute("content", product.name + " — Dr. Gift Shop");
+    document.getElementById("meta-og-description").setAttribute("content", product.description);
+    document.getElementById("meta-og-image").setAttribute("content", `https://www.dokter-giftshop.nl/${product.image}`);
+    document.getElementById("meta-og-url").setAttribute("content", productUrl);
+
+    const ldJson = document.createElement("script");
+    ldJson.type = "application/ld+json";
+    ldJson.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: product.name,
+      description: product.description,
+      image: `https://www.dokter-giftshop.nl/${product.image}`,
+      url: productUrl,
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "EUR",
+        price: product.price.toFixed(2),
+        availability: "https://schema.org/InStock",
+        url: productUrl
+      }
+    });
+    document.head.appendChild(ldJson);
+
     const minQty = product.minQty || 1;
     const hasSizes = Array.isArray(product.sizes) && product.sizes.length > 0;
     root.innerHTML = `

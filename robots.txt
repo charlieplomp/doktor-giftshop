@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /cart.html
+Disallow: /checkout.html
+Disallow: /bevestiging.html
+
+Sitemap: https://www.dokter-giftshop.nl/sitemap.xml
