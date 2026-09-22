@@ -89,6 +89,9 @@ module.exports = async (req, res) => {
     return res.status(200).json({ checkoutUrl: payment.getCheckoutUrl() });
   } catch (error) {
     console.error("Fout bij het aanmaken van de Mollie-betaling:", error);
-    return res.status(500).json({ error: "Er is iets misgegaan bij het starten van de betaling. Probeer het opnieuw." });
+    return res.status(500).json({
+      error: "Er is iets misgegaan bij het starten van de betaling. Probeer het opnieuw.",
+      debug: { message: error.message, title: error.title, field: error.field, statusCode: error.statusCode }
+    });
   }
 };
