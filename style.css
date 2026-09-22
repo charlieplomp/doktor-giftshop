@@ -277,7 +277,11 @@ button {
 .story-inner p {
   font-size: 1.05rem;
   color: #333;
-  margin: 0;
+  margin: 0 0 16px;
+}
+
+.story-inner p:last-child {
+  margin-bottom: 0;
 }
 
 /* Footer */
