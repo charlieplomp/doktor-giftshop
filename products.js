@@ -11,12 +11,12 @@ const PRODUCTS = [
   },
   {
     id: "romper",
-    name: "Romper (baby)",
+    name: "Romper",
     price: 19.95,
     categories: ["Kind"],
     bestseller: false,
     image: "images/romper.jpg",
-    description: "Voor de kleinste aanstormende dokter. Zachte biologisch katoenen romper, ideaal als kraamcadeau voor medische ouders."
+    description: "Zwarte romper, 100% katoen, met befje-opdruk. Alleen verkrijgbaar in maat 62/68 (ca. 2 – 6 maanden)."
   },
   {
     id: "beer-stethoscoop",
@@ -25,7 +25,7 @@ const PRODUCTS = [
     categories: ["Kind"],
     bestseller: true,
     image: "images/beer-stethoscoop.jpg",
-    description: "Een knuffelbeer compleet met eigen stethoscoopje. Perfect cadeau voor een pasgeboren baby van een dokter, of gewoon omdat het kan."
+    description: "Lieve zachte beer met toga (100% badstof katoen). Lengte 30 cm. Inclusief kaart."
   },
   {
     id: "slabbetje",
@@ -34,7 +34,7 @@ const PRODUCTS = [
     categories: ["Kind"],
     bestseller: false,
     image: "images/slabbetje.jpg",
-    description: "Praktisch en grappig slabbetje met medisch thema, ideaal voor bij de eerste hapjes."
+    description: "Slab met mouwen, 100% badstof katoen (wit katoen). Voor peuter vanaf ca. 2 jaar. Per 2 stuks."
   },
   {
     id: "cappuccino-kopje",
@@ -43,7 +43,8 @@ const PRODUCTS = [
     categories: ["Keuken", "Office"],
     bestseller: true,
     image: "images/mok.jpg",
-    description: "Stevig cappuccino kopje met schotel, geschikt voor de vroege ochtendkoffie voor of na een nachtdienst."
+    minQty: 2,
+    description: "Grote porseleinen kop en schotel, vaatwasser en magnetron bestendig. Minimale bestelling: 2 stuks."
   },
   {
     id: "espresso-kopje",
@@ -52,7 +53,8 @@ const PRODUCTS = [
     categories: ["Keuken", "Office"],
     bestseller: true,
     image: "images/espressokopje.jpg",
-    description: "Klein espresso kopje met schotel voor de korte, krachtige koffiepauze tussen twee patiënten door."
+    minQty: 2,
+    description: "Kleine porseleinen kop en schotel, vaatwasser en magnetron bestendig. Minimale bestelling: 2 stuks."
   },
   {
     id: "ansichtkaarten",
@@ -70,7 +72,8 @@ const PRODUCTS = [
     categories: ["Keuken"],
     bestseller: false,
     image: "images/bordje.jpg",
-    description: "Stevig ontbijt- of lunchbordje met een subtiel dokters-detail aan de rand. Perfect voor de vroege dienst of de lunch op de afdeling."
+    minQty: 2,
+    description: "Porseleinen bordje, geschikt voor ontbijt, lunch of een taartje (dia 21 cm), vaatwasser en magnetron bestendig. Minimale bestelling: 2 stuks."
   },
   {
     id: "bierviltjes",
@@ -79,6 +82,6 @@ const PRODUCTS = [
     categories: ["Keuken"],
     bestseller: false,
     image: "images/coasters.jpg",
-    description: "Set stijlvolle bierviltjes met stethoscoop-icoon. Onmisbaar onder het biertje na een lange dienst."
+    description: "Leuke kartonnen bierviltjes (dia 10 cm), 50 stuks."
   }
 ];

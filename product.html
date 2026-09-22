@@ -63,6 +63,7 @@
     `;
   } else {
     document.title = product.name + " — Dr. Gift Shop";
+    const minQty = product.minQty || 1;
     root.innerHTML = `
       <div class="product-detail">
         <div class="thumb"><img src="${product.image}" alt="${product.name}"></div>
@@ -73,7 +74,7 @@
           <div class="qty-row">
             <div class="qty-control">
               <button type="button" id="qty-minus">−</button>
-              <input type="text" id="qty-input" value="1" inputmode="numeric">
+              <input type="text" id="qty-input" value="${minQty}" inputmode="numeric">
               <button type="button" id="qty-plus">+</button>
             </div>
             <button class="btn" id="add-btn">In winkelwagen</button>
@@ -85,13 +86,16 @@
 
     const qtyInput = document.getElementById("qty-input");
     document.getElementById("qty-minus").addEventListener("click", () => {
-      qtyInput.value = Math.max(1, parseInt(qtyInput.value || "1", 10) - 1);
+      qtyInput.value = Math.max(minQty, parseInt(qtyInput.value || String(minQty), 10) - 1);
     });
     document.getElementById("qty-plus").addEventListener("click", () => {
-      qtyInput.value = parseInt(qtyInput.value || "1", 10) + 1;
+      qtyInput.value = Math.max(minQty, parseInt(qtyInput.value || String(minQty), 10) + 1);
+    });
+    qtyInput.addEventListener("change", () => {
+      qtyInput.value = Math.max(minQty, parseInt(qtyInput.value || String(minQty), 10) || minQty);
     });
     document.getElementById("add-btn").addEventListener("click", () => {
-      const qty = Math.max(1, parseInt(qtyInput.value || "1", 10));
+      const qty = Math.max(minQty, parseInt(qtyInput.value || String(minQty), 10) || minQty);
       addToCart(product.id, qty);
       const confirm = document.getElementById("add-confirm");
       confirm.classList.add("show");
