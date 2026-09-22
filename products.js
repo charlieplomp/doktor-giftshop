@@ -106,7 +106,7 @@ const PRODUCTS = [
   {
     id: "ijskastmagneet",
     name: "IJskastmagneet",
-    price: 12.50,
+    price: 18.50,
     categories: ["Keuken"],
     bestseller: false,
     image: "images/ijskastmagneet.jpg",
