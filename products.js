@@ -149,7 +149,17 @@ const PRODUCTS = [
     bestseller: false,
     image: "images/poloshirt.jpg",
     sizes: ["S", "M", "L", "XL"],
+    description: "Rood poloshirt met geborduurde stethoscoop-applicatie."
+  },
+  {
+    id: "badjas",
+    name: "Badjas",
+    price: 65.00,
+    categories: ["Sport"],
+    bestseller: false,
+    image: "images/badjas.jpg",
+    sizes: ["S", "M", "L", "XL"],
     personalization: { price: 5.00 },
-    description: "Rood poloshirt met geborduurde stethoscoop-applicatie. Voeg optioneel een naam of bedrijfsnaam toe om te laten borduren."
+    description: "Rode badjas met geborduurde stethoscoop-applicatie. Voeg optioneel een naam toe om te laten borduren."
   }
 ];
