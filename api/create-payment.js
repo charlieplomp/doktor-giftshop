@@ -90,7 +90,8 @@ module.exports = async (req, res) => {
           bedrijfsnaam: (customer.bedrijfsnaam || "").trim() || null,
           adres: `${customer.straat.trim()}, ${customer.postcode.trim()} ${customer.plaats.trim()}, ${customer.land || "Nederland"}`,
           telefoon: customer.telefoon.trim(),
-          email: customer.email.trim()
+          email: customer.email.trim(),
+          opmerkingen: (customer.opmerkingen || "").trim() || null
         }
       }
     });

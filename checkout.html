@@ -132,6 +132,10 @@
             </div>
           </div>
           <p class="form-note">Land van levering: Nederland</p>
+          <div class="form-field">
+            <label for="opmerkingen">Opmerkingen bij je bestelling (optioneel)</label>
+            <textarea id="opmerkingen" name="opmerkingen" rows="3" placeholder="Bijv. een naam die geborduurd moet worden"></textarea>
+          </div>
         </form>
 
         <div class="checkout-summary">
@@ -181,7 +185,8 @@
         plaats: document.getElementById("plaats").value.trim(),
         land: "Nederland",
         telefoon: document.getElementById("telefoon").value.trim(),
-        email: document.getElementById("email").value.trim()
+        email: document.getElementById("email").value.trim(),
+        opmerkingen: document.getElementById("opmerkingen").value.trim()
       };
 
       submitOrderForPayment(customer, document.getElementById("pay-btn"));

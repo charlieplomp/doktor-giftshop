@@ -8,6 +8,12 @@ function formatPrice(amount) {
   return "€ " + Number(amount).toFixed(2).replace(".", ",");
 }
 
+function escapeHtml(tekst) {
+  return String(tekst || "").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[ch]));
+}
+
 async function stuurBestelmail(payment) {
   const resendKey = process.env.RESEND_API_KEY;
   if (!resendKey) {
@@ -19,15 +25,16 @@ async function stuurBestelmail(payment) {
   const klant = (payment.metadata && payment.metadata.klant) || {};
 
   const itemsHtml = items
-    .map(item => `<tr><td style="padding:4px 12px 4px 0;">${item.name}</td><td style="padding:4px 12px;">× ${item.qty}</td><td style="padding:4px 0; text-align:right;">${formatPrice(item.price * item.qty)}</td></tr>`)
+    .map(item => `<tr><td style="padding:4px 12px 4px 0;">${escapeHtml(item.name)}</td><td style="padding:4px 12px;">× ${Number(item.qty) || 0}</td><td style="padding:4px 0; text-align:right;">${formatPrice(item.price * item.qty)}</td></tr>`)
     .join("");
 
   const html = `
     <h2>Nieuwe bestelling — ${formatPrice(payment.amount.value)}</h2>
-    <p><strong>Klant:</strong> ${klant.naam || "-"}${klant.bedrijfsnaam ? ` (${klant.bedrijfsnaam})` : ""}</p>
-    <p><strong>Adres:</strong> ${klant.adres || "-"}</p>
-    <p><strong>Telefoon:</strong> ${klant.telefoon || "-"}</p>
-    <p><strong>E-mail:</strong> ${klant.email || "-"}</p>
+    <p><strong>Klant:</strong> ${escapeHtml(klant.naam) || "-"}${klant.bedrijfsnaam ? ` (${escapeHtml(klant.bedrijfsnaam)})` : ""}</p>
+    <p><strong>Adres:</strong> ${escapeHtml(klant.adres) || "-"}</p>
+    <p><strong>Telefoon:</strong> ${escapeHtml(klant.telefoon) || "-"}</p>
+    <p><strong>E-mail:</strong> ${escapeHtml(klant.email) || "-"}</p>
+    ${klant.opmerkingen ? `<p><strong>Opmerkingen:</strong> ${escapeHtml(klant.opmerkingen)}</p>` : ""}
     <table style="border-collapse:collapse; margin:16px 0;">${itemsHtml}</table>
     <p><strong>Subtotaal (excl. btw):</strong> ${formatPrice(payment.metadata.subtotaalExclBtw)}<br>
     <strong>Btw:</strong> ${formatPrice(payment.metadata.btw)}<br>

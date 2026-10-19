@@ -121,5 +121,33 @@ const PRODUCTS = [
     image: "images/sportkousen.jpg",
     sizes: ["36-40", "41-45"],
     description: "Witte sportkousen met stethoscoop-opdruk. Comfortabel voor onderweg of tijdens het sporten."
+  },
+  {
+    id: "cap",
+    name: "Cap",
+    price: 26.50,
+    categories: ["Sport"],
+    bestseller: false,
+    image: "images/cap.jpg",
+    description: "Cap (100% katoen) met geborduurde stethoscoop-applicatie, 1 maat/verstelbaar."
+  },
+  {
+    id: "golfhanddoek",
+    name: "Golfhanddoek",
+    price: 26.50,
+    categories: ["Sport"],
+    bestseller: false,
+    image: "images/golfhanddoek.jpg",
+    description: "Rode golfhanddoek met geborduurde stethoscoop-applicatie. Personalisatie met naam mogelijk tegen meerprijs — laat het ons weten via de opmerkingen bij je bestelling."
+  },
+  {
+    id: "poloshirt",
+    name: "Poloshirt",
+    price: 45.00,
+    categories: ["Sport"],
+    bestseller: false,
+    image: "images/poloshirt.jpg",
+    sizes: ["S", "M", "L", "XL"],
+    description: "Rood poloshirt met geborduurde stethoscoop-applicatie. Personalisatie met naam mogelijk tegen meerprijs (+ € 5,00) — laat het ons weten via de opmerkingen bij je bestelling."
   }
 ];
