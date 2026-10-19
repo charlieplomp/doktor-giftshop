@@ -143,7 +143,7 @@
           <table class="checkout-items">
             ${items.map(item => `
               <tr>
-                <td>${item.name}${item.size ? ` · Maat ${item.size}` : ""} × ${item.qty}</td>
+                <td>${item.name}${item.size ? ` · Maat ${item.size}` : ""}${item.personalization ? ` · Naam: ${escapeHtml(item.personalization)}` : ""} × ${item.qty}</td>
                 <td>${formatPrice(item.lineTotal)}</td>
               </tr>
             `).join("")}

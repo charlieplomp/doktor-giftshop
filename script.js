@@ -6,6 +6,12 @@ function formatPrice(amount) {
   return "€ " + amount.toFixed(2).replace(".", ",");
 }
 
+function escapeHtml(tekst) {
+  return String(tekst || "").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[ch]));
+}
+
 function getCart() {
   try {
     return JSON.parse(localStorage.getItem(CART_KEY)) || [];
@@ -24,8 +30,22 @@ function clearCart() {
   updateCartBadge();
 }
 
+// Een winkelwagenregel-id bestaat uit: productId[::maat][\u0000personalisatietekst]
+// Het null-teken is een veilig scheidingsteken: dat kan een klant niet intypen in een tekstveld.
+function makeCartId(productId, size, personalization) {
+  let id = size ? `${productId}::${size}` : productId;
+  if (personalization) id += "\u0000" + personalization;
+  return id;
+}
+
+function parseCartId(cartItemId) {
+  const [idWithSize, personalization] = cartItemId.split("\u0000");
+  const [baseId, size] = idWithSize.split("::");
+  return { baseId, size: size || null, personalization: personalization || null };
+}
+
 function getMinQty(cartItemId) {
-  const baseId = cartItemId.split("::")[0];
+  const { baseId } = parseCartId(cartItemId);
   const product = PRODUCTS.find(p => p.id === baseId);
   return (product && product.minQty) || 1;
 }
@@ -63,15 +83,19 @@ function setQty(cartItemId, qty) {
 function getCartItems() {
   return getCart()
     .map(item => {
-      const [baseId, size] = item.id.split("::");
+      const { baseId, size, personalization } = parseCartId(item.id);
       const product = PRODUCTS.find(p => p.id === baseId);
       if (!product) return null;
+      const surcharge = personalization && product.personalization ? product.personalization.price : 0;
+      const unitPrice = product.price + surcharge;
       return {
         ...product,
         cartId: item.id,
-        size: size || null,
+        size,
+        personalization,
+        price: unitPrice,
         qty: item.qty,
-        lineTotal: product.price * item.qty
+        lineTotal: unitPrice * item.qty
       };
     })
     .filter(Boolean);
@@ -126,7 +150,11 @@ async function submitOrderForPayment(customer, button) {
       body: JSON.stringify({
         items: items.map(item => ({
           id: item.id,
-          name: item.size ? `${item.name} (maat ${item.size})` : item.name,
+          name: [
+            item.name,
+            item.size ? `maat ${item.size}` : null,
+            item.personalization ? `naam: ${item.personalization}` : null
+          ].filter(Boolean).join(" - "),
           qty: item.qty,
           price: item.price
         })),

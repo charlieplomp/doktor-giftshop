@@ -124,12 +124,13 @@
 
     const minQty = product.minQty || 1;
     const hasSizes = Array.isArray(product.sizes) && product.sizes.length > 0;
+    const hasPersonalization = !!product.personalization;
     root.innerHTML = `
       <div class="product-detail">
         <div class="thumb"><img src="${product.image}" alt="${product.name}"></div>
         <div class="product-info">
           <h1>${product.name}</h1>
-          <p class="price">${formatPrice(product.price)}</p>
+          <p class="price" id="price-display">${formatPrice(product.price)}</p>
           <p class="description">${product.description}</p>
           ${hasSizes ? `
           <div class="size-row">
@@ -138,6 +139,12 @@
               <option value="">Kies een optie</option>
               ${product.sizes.map(s => `<option value="${s}">${s}</option>`).join("")}
             </select>
+          </div>
+          ` : ""}
+          ${hasPersonalization ? `
+          <div class="form-field personalization-field">
+            <label for="personalization-input">Naam of bedrijfsnaam (optioneel, geborduurd, + ${formatPrice(product.personalization.price)})</label>
+            <input type="text" id="personalization-input" placeholder="Bijv. Jan Jansen of je bedrijfsnaam">
           </div>
           ` : ""}
           <div class="qty-row">
@@ -167,6 +174,17 @@
 
     const sizeSelect = document.getElementById("size-select");
     const sizeError = document.getElementById("size-error");
+    const personalizationInput = document.getElementById("personalization-input");
+    const priceDisplay = document.getElementById("price-display");
+
+    if (personalizationInput) {
+      personalizationInput.addEventListener("input", () => {
+        const hasText = personalizationInput.value.trim().length > 0;
+        const amount = product.price + (hasText ? product.personalization.price : 0);
+        priceDisplay.textContent = formatPrice(amount);
+      });
+    }
+
     document.getElementById("add-btn").addEventListener("click", () => {
       if (hasSizes && !sizeSelect.value) {
         sizeError.classList.add("show");
@@ -174,7 +192,9 @@
       }
       sizeError.classList.remove("show");
       const qty = Math.max(minQty, parseInt(qtyInput.value || String(minQty), 10) || minQty);
-      const cartId = hasSizes ? `${product.id}::${sizeSelect.value}` : product.id;
+      const size = hasSizes ? sizeSelect.value : null;
+      const personalization = personalizationInput ? personalizationInput.value.trim() : "";
+      const cartId = makeCartId(product.id, size, personalization);
       addToCart(cartId, qty);
       const confirm = document.getElementById("add-confirm");
       confirm.classList.add("show");

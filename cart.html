@@ -107,7 +107,7 @@
                 <div class="cart-item-info">
                   <img src="${item.image}" alt="${item.name}">
                   <div>
-                    <p class="name">${item.name}${item.size ? ` · Maat ${item.size}` : ""}</p>
+                    <p class="name">${item.name}${item.size ? ` · Maat ${item.size}` : ""}${item.personalization ? ` · Naam: ${escapeHtml(item.personalization)}` : ""}</p>
                     <button class="remove-btn" data-remove="${item.cartId}">Verwijderen</button>
                   </div>
                 </div>

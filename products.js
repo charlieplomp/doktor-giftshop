@@ -138,7 +138,8 @@ const PRODUCTS = [
     categories: ["Sport"],
     bestseller: false,
     image: "images/golfhanddoek.jpg",
-    description: "Rode golfhanddoek met geborduurde stethoscoop-applicatie. Personalisatie met naam mogelijk tegen meerprijs — laat het ons weten via de opmerkingen bij je bestelling."
+    personalization: { price: 10.50 },
+    description: "Rode golfhanddoek met geborduurde stethoscoop-applicatie. Voeg optioneel een naam of bedrijfsnaam toe om te laten borduren."
   },
   {
     id: "poloshirt",
@@ -148,6 +149,7 @@ const PRODUCTS = [
     bestseller: false,
     image: "images/poloshirt.jpg",
     sizes: ["S", "M", "L", "XL"],
-    description: "Rood poloshirt met geborduurde stethoscoop-applicatie. Personalisatie met naam mogelijk tegen meerprijs (+ € 5,00) — laat het ons weten via de opmerkingen bij je bestelling."
+    personalization: { price: 5.00 },
+    description: "Rood poloshirt met geborduurde stethoscoop-applicatie. Voeg optioneel een naam of bedrijfsnaam toe om te laten borduren."
   }
 ];
