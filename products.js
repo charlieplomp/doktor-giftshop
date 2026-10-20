@@ -113,6 +113,15 @@ const PRODUCTS = [
     description: "IJskastmagneet (handbeschilderd hars), 6 x 6 x 2 cm."
   },
   {
+    id: "kapstokhaak",
+    name: "Kapstokhaak",
+    price: 21.50,
+    categories: ["Office"],
+    bestseller: false,
+    image: "images/ijskastmagneet.jpg",
+    description: "Kapstokhaak (handbeschilderd hars), 6 x 6 x 2 cm."
+  },
+  {
     id: "sportkousen",
     name: "Sportkousen",
     price: 19.95,
