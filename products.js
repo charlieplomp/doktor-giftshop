@@ -86,6 +86,16 @@ const PRODUCTS = [
     description: "Leuke kartonnen bierviltjes (dia 10 cm), 50 stuks."
   },
   {
+    id: "snijplank",
+    name: "Snijplank",
+    price: 37.50,
+    categories: ["Keuken"],
+    bestseller: false,
+    image: "images/snijplank.jpg",
+    personalization: { price: 7.50 },
+    description: "Houten snijplank met gegraveerde stethoscoop-applicatie. Voeg optioneel een naam toe om te laten graveren."
+  },
+  {
     id: "placemat-groot",
     name: "Placemats logo groot",
     price: 16.50,
